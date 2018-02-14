@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using POSTerminal.Core.Interfaces;
 using POSTerminal.Core.Model;
+using POSTerminal.Core.Providers;
+using POSTerminal.Core.Services;
 
 namespace POSTerminal.Core
 {
     public class PointOfSaleTerminal
     {
-        private readonly ProductProvider _productProvider;
+        private readonly IProductProvider _productProvider;
 
-        private readonly DiscountProvider _discountProvider;
+        private readonly IDiscountProvider _discountProvider;
 
         private readonly Cart _cart;
         
-        private readonly CalculatorService _calculatorService;
+        private readonly ICalculatorService _calculatorService;
 
         public PointOfSaleTerminal()
         {

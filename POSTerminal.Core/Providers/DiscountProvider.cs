@@ -1,10 +1,11 @@
-﻿using POSTerminal.Core.Model;
+﻿using POSTerminal.Core.Interfaces;
+using POSTerminal.Core.Model;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace POSTerminal.Core
+namespace POSTerminal.Core.Providers
 {
-    public class DiscountProvider
+    public class DiscountProvider : IDiscountProvider
     {
         private readonly IList<Discount> _discounts;
 

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using POSTerminal.Core.Interfaces;
 using POSTerminal.Core.Model;
 
-namespace POSTerminal.Core
+namespace POSTerminal.Core.Providers
 {
-    public class ProductProvider
+    public class ProductProvider : IProductProvider
     {
         private readonly IList<Product> _products;
 

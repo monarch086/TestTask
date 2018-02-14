@@ -40,16 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculatorService.cs" />
-    <Compile Include="DiscountProvider.cs" />
+    <Compile Include="Interfaces\ICalculatorService.cs" />
+    <Compile Include="Services\CalculatorService.cs" />
+    <Compile Include="Interfaces\IDiscountProvider.cs" />
+    <Compile Include="Interfaces\IProductProvider.cs" />
+    <Compile Include="Providers\DiscountProvider.cs" />
     <Compile Include="Model\Cart.cs" />
     <Compile Include="Model\Discount.cs" />
     <Compile Include="Model\OrderedProductList.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="PointOfSaleTerminal.cs" />
-    <Compile Include="ProductProvider.cs" />
+    <Compile Include="Providers\ProductProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
