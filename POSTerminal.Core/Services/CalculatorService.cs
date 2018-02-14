@@ -1,31 +1,43 @@
-﻿using System.Linq;
-using POSTerminal.Core.Interfaces;
-using POSTerminal.Core.Model;
+﻿using POSTerminal.Core.Interfaces;
+using POSTerminal.Domain;
+using System.Linq;
 
 namespace POSTerminal.Core.Services
 {
     public class CalculatorService : ICalculatorService
     {
-        public double GetTotalPrice(Cart cart, IDiscountProvider discountProvider)
-        {
-            var orderedProducts = cart.GetOrderedProducts();
+        private readonly IProductProvider _productProvider;
 
-            return orderedProducts.Sum(op => GetTotalPricePerItem(op, discountProvider.GetDiscountByProductCode(op.Product.ProductCode)));
+        private readonly IDiscountProvider _discountProvider;
+
+        public CalculatorService(IProductProvider productProvider, IDiscountProvider discountProvider)
+        {
+            _productProvider = productProvider;
+            _discountProvider = discountProvider;
         }
 
-        private double GetTotalPricePerItem(OrderedProductList orderedItem, Discount discount)
+        public double GetTotalPrice(Cart cart)
         {
+            var orderedItems = cart.GetOrderedProducts();
+
+            return orderedItems.Sum(item => GetTotalPricePerItem(item.Key, item.Value, _discountProvider.GetDiscountByProductCode(item.Key)));
+        }
+
+        private double GetTotalPricePerItem(string productCode, int totalCount, Discount discount)
+        {
+            var price = _productProvider.GetPriceByProductCode(productCode);
+
             if (discount == null)
             {
-                return orderedItem.TotalCount * orderedItem.Product.Price;
+                return totalCount * price;
             }
 
-            var discountedCount = orderedItem.TotalCount - orderedItem.TotalCount % discount.MinimalCountNeeded;
+            var discountedCount = totalCount - totalCount % discount.MinimalCountNeeded;
 
-            var nonDiscountedCount = orderedItem.TotalCount - discountedCount;
+            var nonDiscountedCount = totalCount - discountedCount;
 
             return discountedCount / discount.MinimalCountNeeded * discount.DiscountedPrice +
-                       nonDiscountedCount * orderedItem.Product.Price;
+                       nonDiscountedCount * price;
         }
     }
 }

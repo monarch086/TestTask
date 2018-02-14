@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSTerminal.Core", "POSTerm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSTerminal.Tests", "POSTerminal.Tests\POSTerminal.Tests.csproj", "{067456C0-086C-46A8-B37F-1405717B7BFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSTerminal.Domain", "POSTerminal.Domain\POSTerminal.Domain.csproj", "{D455F46A-A789-4D7F-A257-CCAEC159DD6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSTerminal.DataLayer", "POSTerminal.DataLayer\POSTerminal.DataLayer.csproj", "{5B3316DC-8387-4AEF-B7DF-9E5B8C5C7506}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{067456C0-086C-46A8-B37F-1405717B7BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{067456C0-086C-46A8-B37F-1405717B7BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{067456C0-086C-46A8-B37F-1405717B7BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D455F46A-A789-4D7F-A257-CCAEC159DD6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D455F46A-A789-4D7F-A257-CCAEC159DD6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D455F46A-A789-4D7F-A257-CCAEC159DD6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D455F46A-A789-4D7F-A257-CCAEC159DD6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3316DC-8387-4AEF-B7DF-9E5B8C5C7506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3316DC-8387-4AEF-B7DF-9E5B8C5C7506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3316DC-8387-4AEF-B7DF-9E5B8C5C7506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3316DC-8387-4AEF-B7DF-9E5B8C5C7506}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

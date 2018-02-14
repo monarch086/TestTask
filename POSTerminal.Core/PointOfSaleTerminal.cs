@@ -1,8 +1,9 @@
-﻿using System;
-using POSTerminal.Core.Interfaces;
-using POSTerminal.Core.Model;
+﻿using POSTerminal.Core.Interfaces;
 using POSTerminal.Core.Providers;
 using POSTerminal.Core.Services;
+using POSTerminal.DataLayer;
+using POSTerminal.Domain;
+using System;
 
 namespace POSTerminal.Core
 {
@@ -16,44 +17,49 @@ namespace POSTerminal.Core
         
         private readonly ICalculatorService _calculatorService;
 
+        private readonly IRepository<string, Discount> _discounts;
+
+        
+
         public PointOfSaleTerminal()
         {
             _productProvider = new ProductProvider();
             _discountProvider = new DiscountProvider();
             _cart = new Cart();
-            _calculatorService = new CalculatorService();
+            _calculatorService = new CalculatorService(_productProvider, _discountProvider);
         }
 
         public void SetPricing()
         {
-            _productProvider.AddProduct(new Product { ProductCode = "A", Price = 1.25 });
+            //_productProvider.AddProduct("A", 1.25);
 
-            _productProvider.AddProduct(new Product { ProductCode = "B", Price = 4.25 });
+            //_productProvider.AddProduct("B", 4.25);
 
-            _productProvider.AddProduct(new Product { ProductCode = "C", Price = 1.00 });
+            //_productProvider.AddProduct("C", 1.00);
 
-            _productProvider.AddProduct(new Product { ProductCode = "D", Price = 0.75 });
+            //_productProvider.AddProduct("D", 0.75);
 
-            _discountProvider.AddDiscount(new Discount { ProductCode = "A", MinimalCountNeeded = 3, DiscountedPrice = 3.00 });
+            //_discountProvider.AddDiscount("A", new Discount { MinimalCountNeeded = 3, DiscountedPrice = 3.00 });
 
-            _discountProvider.AddDiscount(new Discount { ProductCode = "C", MinimalCountNeeded = 6, DiscountedPrice = 5.00 });
+            //_discountProvider.AddDiscount("C", new Discount { MinimalCountNeeded = 6, DiscountedPrice = 5.00 });
+            _productProvider.PopulateProducts();
+            _discountProvider.PopulateDiscounts();
         }
 
         public void Scan(string productCode)
         {
-            Product product = _productProvider.GetProductByProductCode(productCode);
-
-            if (product == null)
+            if (_productProvider.ContainsProduct(productCode))
             {
-                throw new ArgumentException($"Product {productCode} is not available");
+                _cart.AddProduct(productCode);
+                return;
             }
 
-            _cart.AddProduct(product);
+            throw new ArgumentException($"Product {productCode} is not available");
         }
 
         public double CalculateTotal()
         {
-            return _calculatorService.GetTotalPrice(_cart, _discountProvider);
+            return _calculatorService.GetTotalPrice(_cart);
         }
 
         public void ClearOrderedProductsList()

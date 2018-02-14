@@ -1,27 +1,44 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using POSTerminal.Core.Interfaces;
-using POSTerminal.Core.Model;
+using POSTerminal.DataLayer;
 
 namespace POSTerminal.Core.Providers
 {
     public class ProductProvider : IProductProvider
     {
-        private readonly IList<Product> _products;
+        private readonly Dictionary<string, double> _products;
+
+        private readonly IRepository<string, double> _productsRepository;
 
         public ProductProvider()
         {
-            _products = new List<Product>();
+            _products = new Dictionary<string, double>();
+            _productsRepository = new ProductRepository();
         }
 
-        public void AddProduct(Product product)
+        public void PopulateProducts()
         {
-            _products.Add(product);
+            var repositoryProducts = _productsRepository.GetAll();
+
+            foreach (var product in repositoryProducts)
+            {
+                _products.Add(product.Key, product.Value);
+            }
         }
 
-        public Product GetProductByProductCode(string productCode)
+        public void AddProduct(string productCode, double price)
         {
-            return _products.FirstOrDefault(d => d.ProductCode == productCode);
+            _products.Add(productCode, price);
+        }
+
+        public double GetPriceByProductCode(string productCode)
+        {
+            return _products[productCode];
+        }
+
+        public bool ContainsProduct(string productCode)
+        {
+            return _products.ContainsKey(productCode);
         }
     }
 }

@@ -1,10 +1,8 @@
-﻿namespace POSTerminal.Core.Model
+﻿namespace POSTerminal.Domain
 {
     public class Discount
     {
         public int MinimalCountNeeded { get; set; }
-
-        public string ProductCode { get; set; }
 
         public double DiscountedPrice { get; set; }
     }
