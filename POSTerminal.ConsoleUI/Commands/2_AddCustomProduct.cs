@@ -1,15 +1,23 @@
 ﻿using System;
+using POSTerminal.Core;
 using POSTerminal.Domain;
 
 namespace POSTerminal.ConsoleUI.Commands
 {
     public class _2_AddCustomProduct : Command
     {
+        private readonly PointOfSaleTerminal _terminal;
+
+        public _2_AddCustomProduct(PointOfSaleTerminal terminal)
+        {
+            _terminal = terminal;
+        }
+
         public override string CommandCode => "2";
 
         public override string Description => "2 - add custom product";
 
-        public override CommandAction CommandAction => terminal =>
+        public override Action CommandAction => () =>
         {
             Console.Write("Enter product code: ");
             var productCode = Console.ReadLine();
@@ -23,7 +31,7 @@ namespace POSTerminal.ConsoleUI.Commands
                 price = Console.ReadLine();
             }
 
-            terminal.AddCustomProduct(new Product {Code = productCode, Price = parsedPrice});
+            _terminal.AddCustomProduct(new Product {Code = productCode, Price = parsedPrice});
             Console.WriteLine($"New product with code {productCode} was successfully added");
         };
     }

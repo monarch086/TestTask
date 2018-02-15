@@ -15,9 +15,11 @@ namespace POSTerminal.Core.Providers
         {
             _discounts = new Dictionary<string, Discount>();
             _discountsRepository = new DiscountRepository();
+
+            PopulateDiscounts();
         }
 
-        public void PopulateDiscounts()
+        private void PopulateDiscounts()
         {
             var repositoryDiscounts = _discountsRepository.GetAll();
 

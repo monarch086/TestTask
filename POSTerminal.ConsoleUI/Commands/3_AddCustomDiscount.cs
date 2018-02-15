@@ -1,15 +1,23 @@
 ﻿using System;
 using POSTerminal.Domain;
+using POSTerminal.Core;
 
 namespace POSTerminal.ConsoleUI.Commands
 {
     public class _3_AddCustomDiscount : Command
     {
+        private readonly PointOfSaleTerminal _terminal;
+
+        public _3_AddCustomDiscount(PointOfSaleTerminal terminal)
+        {
+            _terminal = terminal;
+        }
+
         public override string CommandCode => "3";
 
         public override string Description => "3 - add custom discount";
 
-        public override CommandAction CommandAction => terminal =>
+        public override Action CommandAction => () =>
         {
             Console.Write("Enter product code: ");
             var productCode = Console.ReadLine();
@@ -32,7 +40,7 @@ namespace POSTerminal.ConsoleUI.Commands
                 price = Console.ReadLine();
             }
 
-            terminal.AddCustomDiscount(new Discount
+            _terminal.AddCustomDiscount(new Discount
             {
                 ProductCode = productCode,
                 MinimalCountNeeded = parsedCount,

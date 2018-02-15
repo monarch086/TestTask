@@ -15,9 +15,11 @@ namespace POSTerminal.Core.Providers
         {
             _products = new Dictionary<string, Product>();
             _productsRepository = new ProductRepository();
+
+            PopulateProducts();
         }
 
-        public void PopulateProducts()
+        private void PopulateProducts()
         {
             var repositoryProducts = _productsRepository.GetAll();
 
@@ -34,7 +36,11 @@ namespace POSTerminal.Core.Providers
 
         public Product GetProductByCode(string productCode)
         {
-            return _products[productCode];
+            if (_products.ContainsKey(productCode))
+            {
+                return _products[productCode];
+            }
+            return null;
         }
 
         public bool ContainsProduct(string productCode)

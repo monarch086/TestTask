@@ -1,9 +1,7 @@
 ﻿using POSTerminal.Core.Interfaces;
 using POSTerminal.Core.Providers;
 using POSTerminal.Core.Services;
-using POSTerminal.DataLayer;
 using POSTerminal.Domain;
-using System;
 
 namespace POSTerminal.Core
 {
@@ -25,10 +23,17 @@ namespace POSTerminal.Core
             _calculatorService = new CalculatorService(_productProvider, _discountProvider);
         }
 
-        public void SetPricing()
+        public bool SetPricing(string productCode, double price)
         {
-            _productProvider.PopulateProducts();
-            _discountProvider.PopulateDiscounts();
+            var product = _productProvider.GetProductByCode(productCode);
+
+            if (product != null)
+            {
+                product.Price = price;
+                return true;
+            }
+            
+            return false;
         }
 
         public void AddCustomProduct(Product product)

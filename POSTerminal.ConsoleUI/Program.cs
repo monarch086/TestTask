@@ -13,12 +13,12 @@ namespace POSTerminal.ConsoleUI
             PointOfSaleTerminal terminal = new PointOfSaleTerminal();
             IEnumerable<Command> commands = new List<Command>
             {
-                new _1_SetDefaultPricesAndDiscountsCommand(),
-                new _2_AddCustomProduct(),
-                new _3_AddCustomDiscount(),
-                new _4_ScanProduct(),
-                new _5_ShowTotalPrice(),
-                new _6_ClearCart()
+                new _1_SetPricing(terminal),
+                new _2_AddCustomProduct(terminal),
+                new _3_AddCustomDiscount(terminal),
+                new _4_ScanProduct(terminal),
+                new _5_ShowTotalPrice(terminal),
+                new _6_ClearCart(terminal)
             };
             
             Console.WriteLine("Welcome to Point-Of-Sale Terminal!");
@@ -36,7 +36,7 @@ namespace POSTerminal.ConsoleUI
 
                 commandCode = Console.ReadLine();
 
-                commands.FirstOrDefault(c => c.CommandCode == commandCode)?.CommandAction(terminal);
+                commands.FirstOrDefault(c => c.CommandCode == commandCode)?.CommandAction();
             }
         }
     }

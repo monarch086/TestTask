@@ -4,8 +4,6 @@ namespace POSTerminal.Core.Interfaces
 {
     public interface IProductProvider
     {
-        void PopulateProducts();
-
         void AddProduct(Product product);
 
         Product GetProductByCode(string productCode);

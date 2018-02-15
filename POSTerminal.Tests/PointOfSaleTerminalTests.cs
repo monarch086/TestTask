@@ -12,7 +12,6 @@ namespace POSTerminal.Tests
         public void TerminalSetUp()
         {
             _terminal = new PointOfSaleTerminal();
-            _terminal.SetPricing();
         }
 
         [TestCase("ABCDABA", 13.25)]
