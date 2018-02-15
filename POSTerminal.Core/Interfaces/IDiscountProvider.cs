@@ -6,7 +6,7 @@ namespace POSTerminal.Core.Interfaces
     {
         void PopulateDiscounts();
 
-        void AddDiscount(string productCode, Discount discount);
+        void AddDiscount(Discount discount);
 
         Discount GetDiscountByProductCode(string productCode);
     }

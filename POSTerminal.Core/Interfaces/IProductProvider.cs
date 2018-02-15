@@ -1,12 +1,14 @@
-﻿namespace POSTerminal.Core.Interfaces
+﻿using POSTerminal.Domain;
+
+namespace POSTerminal.Core.Interfaces
 {
     public interface IProductProvider
     {
         void PopulateProducts();
 
-        void AddProduct(string productCode, double price);
+        void AddProduct(Product product);
 
-        double GetPriceByProductCode(string productCode);
+        Product GetProductByCode(string productCode);
 
         bool ContainsProduct(string productCode);
     }

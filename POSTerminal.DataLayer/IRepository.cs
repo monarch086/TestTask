@@ -2,8 +2,8 @@
 
 namespace POSTerminal.DataLayer
 {
-    public interface IRepository<TKey, TValue>
+    public interface IRepository<T>
     {
-        ICollection<KeyValuePair<TKey, TValue>> GetAll();
+        IEnumerable<T> GetAll();
     }
 }

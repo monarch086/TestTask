@@ -17,10 +17,6 @@ namespace POSTerminal.Core
         
         private readonly ICalculatorService _calculatorService;
 
-        private readonly IRepository<string, Discount> _discounts;
-
-        
-
         public PointOfSaleTerminal()
         {
             _productProvider = new ProductProvider();
@@ -31,30 +27,29 @@ namespace POSTerminal.Core
 
         public void SetPricing()
         {
-            //_productProvider.AddProduct("A", 1.25);
-
-            //_productProvider.AddProduct("B", 4.25);
-
-            //_productProvider.AddProduct("C", 1.00);
-
-            //_productProvider.AddProduct("D", 0.75);
-
-            //_discountProvider.AddDiscount("A", new Discount { MinimalCountNeeded = 3, DiscountedPrice = 3.00 });
-
-            //_discountProvider.AddDiscount("C", new Discount { MinimalCountNeeded = 6, DiscountedPrice = 5.00 });
             _productProvider.PopulateProducts();
             _discountProvider.PopulateDiscounts();
         }
 
-        public void Scan(string productCode)
+        public void AddCustomProduct(Product product)
+        {
+            _productProvider.AddProduct(product);
+        }
+
+        public void AddCustomDiscount(Discount discount)
+        {
+            _discountProvider.AddDiscount(discount);
+        }
+
+        public bool Scan(string productCode)
         {
             if (_productProvider.ContainsProduct(productCode))
             {
                 _cart.AddProduct(productCode);
-                return;
+                return true;
             }
 
-            throw new ArgumentException($"Product {productCode} is not available");
+            return false;
         }
 
         public double CalculateTotal()
@@ -62,7 +57,7 @@ namespace POSTerminal.Core
             return _calculatorService.GetTotalPrice(_cart);
         }
 
-        public void ClearOrderedProductsList()
+        public void ClearCart()
         {
             _cart.ClearCart();
         }

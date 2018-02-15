@@ -9,7 +9,7 @@ namespace POSTerminal.Core.Providers
     {
         private readonly Dictionary<string, Discount> _discounts;
 
-        private readonly IRepository<string, Discount> _discountsRepository;
+        private readonly IRepository<Discount> _discountsRepository;
 
         public DiscountProvider()
         {
@@ -23,13 +23,13 @@ namespace POSTerminal.Core.Providers
 
             foreach (var discount in repositoryDiscounts)
             {
-                _discounts.Add(discount.Key, discount.Value);
+                _discounts.Add(discount.ProductCode, discount);
             }
         }
 
-        public void AddDiscount(string productCode, Discount discount)
+        public void AddDiscount(Discount discount)
         {
-            _discounts.Add(productCode, discount);
+            _discounts.Add(discount.ProductCode, discount);
         }
 
         public Discount GetDiscountByProductCode(string productCode)

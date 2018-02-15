@@ -25,7 +25,7 @@ namespace POSTerminal.Core.Services
 
         private double GetTotalPricePerItem(string productCode, int totalCount, Discount discount)
         {
-            var price = _productProvider.GetPriceByProductCode(productCode);
+            var price = _productProvider.GetProductByCode(productCode).Price;
 
             if (discount == null)
             {

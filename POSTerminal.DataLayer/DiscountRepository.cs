@@ -3,20 +3,20 @@ using POSTerminal.Domain;
 
 namespace POSTerminal.DataLayer
 {
-    public class DiscountRepository : IRepository<string, Discount>
+    public class DiscountRepository : IRepository<Discount>
     {
-        private readonly ICollection<KeyValuePair<string, Discount>> _discounts;
+        private readonly IEnumerable<Discount> _discounts;
 
         public DiscountRepository()
         {
-            _discounts = new Dictionary<string, Discount>
+            _discounts = new List<Discount>
             {
-                { "A", new Discount { MinimalCountNeeded = 3, DiscountedPrice = 3.00 } },
-                { "C", new Discount { MinimalCountNeeded = 6, DiscountedPrice = 5.00 } }
+                new Discount { ProductCode = "A", MinimalCountNeeded = 3, DiscountedPrice = 3.00 },
+                new Discount { ProductCode = "C", MinimalCountNeeded = 6, DiscountedPrice = 5.00 }
             };
         }
 
-        public ICollection<KeyValuePair<string, Discount>> GetAll()
+        public IEnumerable<Discount> GetAll()
         {
             return _discounts;
         }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using POSTerminal.ConsoleUI.Commands;
 using POSTerminal.Core;
 
 namespace POSTerminal.ConsoleUI
@@ -8,39 +11,33 @@ namespace POSTerminal.ConsoleUI
         static void Main(string[] args)
         {
             PointOfSaleTerminal terminal = new PointOfSaleTerminal();
-
-            terminal.SetPricing();
-
-            var orders = "ABCDABA";
-
-            foreach (var order in orders)
+            IEnumerable<Command> commands = new List<Command>
             {
-                terminal.Scan(order.ToString());
-            }
+                new _1_SetDefaultPricesAndDiscountsCommand(),
+                new _2_AddCustomProduct(),
+                new _3_AddCustomDiscount(),
+                new _4_ScanProduct(),
+                new _5_ShowTotalPrice(),
+                new _6_ClearCart()
+            };
+            
+            Console.WriteLine("Welcome to Point-Of-Sale Terminal!");
 
-            Console.WriteLine($"Total price for {orders} is: ${terminal.CalculateTotal()}");
+            string commandCode = "";
 
-            terminal.ClearOrderedProductsList();
-
-            orders = "CCCCCCC";
-
-            foreach (var order in orders)
+            while (commandCode != "q")
             {
-                terminal.Scan(order.ToString());
+                Console.WriteLine("\nEnter one of the following commands or \"q\" to quit:");
+
+                foreach (var command in commands)
+                {
+                    Console.WriteLine(command.Description);
+                }
+
+                commandCode = Console.ReadLine();
+
+                commands.FirstOrDefault(c => c.CommandCode == commandCode)?.CommandAction(terminal);
             }
-
-            Console.WriteLine($"Total price for {orders} is: ${terminal.CalculateTotal()}");
-
-            terminal.ClearOrderedProductsList();
-
-            orders = "ABCD";
-
-            foreach (var order in orders)
-            {
-                terminal.Scan(order.ToString());
-            }
-
-            Console.WriteLine($"Total price for {orders} is: ${terminal.CalculateTotal()}");
         }
     }
 }

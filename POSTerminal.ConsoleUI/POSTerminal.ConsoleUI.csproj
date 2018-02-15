@@ -42,6 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\1_SetDefaultPricesAndDiscountsCommand.cs" />
+    <Compile Include="Commands\2_AddCustomProduct.cs" />
+    <Compile Include="Commands\3_AddCustomDiscount.cs" />
+    <Compile Include="Commands\4_ScanProduct.cs" />
+    <Compile Include="Commands\5_ShowTotalPrice.cs" />
+    <Compile Include="Commands\6_ClearCart.cs" />
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,6 +60,11 @@
       <Project>{6da4b141-615a-4d1c-8525-f4ab34aea34e}</Project>
       <Name>POSTerminal.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\POSTerminal.Domain\POSTerminal.Domain.csproj">
+      <Project>{D455F46A-A789-4D7F-A257-CCAEC159DD6A}</Project>
+      <Name>POSTerminal.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

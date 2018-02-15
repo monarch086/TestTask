@@ -1,23 +1,24 @@
 ﻿using System.Collections.Generic;
+using POSTerminal.Domain;
 
 namespace POSTerminal.DataLayer
 {
-    public class ProductRepository : IRepository<string, double>
+    public class ProductRepository : IRepository<Product>
     {
-        private readonly ICollection<KeyValuePair<string, double>> _products;
+        private readonly IEnumerable<Product> _products;
 
         public ProductRepository()
         {
-            _products = new Dictionary<string, double>
+            _products = new List<Product>
             {
-                { "A", 1.25 },
-                { "B", 4.25 },
-                { "C", 1.00 },
-                { "D", 0.75 }
+                new Product { Code = "A", Price = 1.25 },
+                new Product { Code = "B", Price = 4.25 },
+                new Product { Code = "C", Price = 1.00 },
+                new Product { Code = "D", Price = 0.75 }
             };
         }
 
-        public ICollection<KeyValuePair<string, double>> GetAll()
+        public IEnumerable<Product> GetAll()
         {
             return _products;
         }
